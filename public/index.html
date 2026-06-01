@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bUSface - Sistema de Validação</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Carregar face-api.js para reconhecimento facial -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <h1>🚌 bUSface - Terminal de Acesso</h1>
+    <div class="container">
+        <video id="video" autoplay muted width="640" height="480"></video>
+        <div id="status-box">
+            <p id="status-text">A aguardar sistema...</p>
+        </div>
+    </div>
+</body>
+</html>

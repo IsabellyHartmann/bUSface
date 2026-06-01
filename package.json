@@ -1,0 +1,24 @@
+{
+  "name": "busface",
+  "version": "1.0.0",
+  "description": "Sistema de validação biométrica para transportes e bancos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsabellyHartmann/bUSface.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/IsabellyHartmann/bUSface/issues"
+  },
+  "homepage": "https://github.com/IsabellyHartmann/bUSface#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
