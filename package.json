@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/IsabellyHartmann/bUSface#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "multer": "^2.1.1"
   }
 }

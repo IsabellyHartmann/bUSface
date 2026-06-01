@@ -1,0 +1,14 @@
+# 1. Criar a pasta models na raiz do projeto
+mkdir -p models
+
+# 2. Descarregar os ficheiros do Tiny Face Detector (Deteção leve)
+curl -L https://raw.githubusercontent.com/vladmandic/face-api/master/model/tiny_face_detector_model-weights.shard1 -o models/tiny_face_detector_model-weights.shard1
+curl -L https://raw.githubusercontent.com/vladmandic/face-api/master/model/tiny_face_detector_model-manifest.json -o models/tiny_face_detector_model-manifest.json
+
+# 3. Descarregar os ficheiros do Face Landmark (Pontos fiduciais do rosto)
+curl -L https://raw.githubusercontent.com/vladmandic/face-api/master/model/face_landmark_68_model-weights.shard1 -o models/face_landmark_68_model-weights.shard1
+curl -L https://raw.githubusercontent.com/vladmandic/face-api/master/model/face_landmark_68_model-manifest.json -o models/face_landmark_68_model-manifest.json
+
+# 4. Descarregar os ficheiros do Face Recognition (Reconhecimento/Comparação)
+curl -L https://raw.githubusercontent.com/vladmandic/face-api/master/model/face_recognition_model-weights.shard1 -o models/face_recognition_model-weights.shard1
+curl -L https://raw.githubusercontent.com/vladmandic/face-api/master/model/face_recognition_model-manifest.json -o models/face_recognition_model-manifest.json

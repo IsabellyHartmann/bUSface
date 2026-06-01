@@ -1,21 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bUSface - Sistema de Validação</title>
+    <title>bUSface - Sistema Unificado Biométrico</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Carregar face-api.js para reconhecimento facial -->
     <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
     <script defer src="script.js"></script>
 </head>
+
 <body>
-    <h1>🚌 bUSface - Terminal de Acesso</h1>
-    <div class="container">
-        <video id="video" autoplay muted width="640" height="480"></video>
-        <div id="status-box">
-            <p id="status-text">A aguardar sistema...</p>
+
+    <div class="terminal-card">
+        <header class="terminal-header">
+            <h2>🚌 bUSface</h2>
+            <nav class="tab-menu">
+                <button class="tab-btn active" onclick="switchTab('scanner')">Scanner</button>
+                <button class="tab-btn" onclick="switchTab('registo')">Registo</button>
+                <button class="tab-btn" onclick="switchTab('admin')">Admin</button>
+            </nav>
+        </header>
+
+        <div id="tab-scanner" class="tab-content active-content">
+            <div class="camera-container">
+                <video id="video" autoplay muted playsinline></video>
+                <div class="scanner-line"></div>
+            </div>
+            <div id="status-box" class="status-neutral">
+                <div class="spinner" id="loading-spinner"></div>
+                <p id="status-text">A carregar módulos de segurança...</p>
+            </div>
+        </div>
+
+        <div id="tab-registo" class="tab-content">
+            <div class="form-container">
+                <h3>Registo Biométrico de Passageiro</h3>
+                <form id="registerForm" enctype="multipart/form-data">
+                    <label>Nome Completo:</label>
+                    <input type="text" name="nome" required placeholder="Ex: João Silva">
+
+                    <label>Carregamento Inicial (€):</label>
+                    <input type="number" name="saldo" value="15.00" step="0.01" required>
+
+                    <label>Foto de Perfil Padrão (Frente):</label>
+                    <input type="file" name="foto" accept="image/*" required>
+
+                    <button type="submit" class="submit-btn">Submeter Dados Biométricos</button>
+                </form>
+                <div id="form-feedback"></div>
+            </div>
+        </div>
+
+        <div id="tab-admin" class="tab-content">
+            <div class="admin-container">
+                <h3>Passageiros Ativos & Monitorização</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">Dados cruciais para fins
+                    estatísticos e equipas de socorro em tempo real.</p>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Saldo Atual</th>
+                            <th>Estado do Passe</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
 </body>
+
 </html>
