@@ -2,8 +2,15 @@
   {
     "id": 1780309543102,
     "nome": "Isabelly Hartamann",
-    "saldo": 12.1,
+    "saldo": 9.2,
     "fotoUrl": "/uploads/isabelly_hartamann.jpg",
     "registadoEm": "2026-06-01T10:25:43.102Z"
+  },
+  {
+    "id": 1780310914670,
+    "nome": "Rodrigo Gonçalves ",
+    "saldo": 14.55,
+    "fotoUrl": "/uploads/rodrigo_gon_alves_.jpg",
+    "registadoEm": "2026-06-01T10:48:34.670Z"
   }
 ]
