@@ -2,15 +2,64 @@
   {
     "id": 1780309543102,
     "nome": "Isabelly Hartamann",
-    "saldo": 9.2,
+    "saldo": 0.5,
     "fotoUrl": "/uploads/isabelly_hartamann.jpg",
     "registadoEm": "2026-06-01T10:25:43.102Z"
   },
   {
     "id": 1780310914670,
     "nome": "Rodrigo Gonçalves ",
-    "saldo": 14.55,
+    "saldo": 5.85,
     "fotoUrl": "/uploads/rodrigo_gon_alves_.jpg",
     "registadoEm": "2026-06-01T10:48:34.670Z"
+  },
+  {
+    "id": 1780481737842,
+    "nome": "Dinis ",
+    "saldo": 15,
+    "fotoUrl": "/uploads/dinis_.jpg",
+    "registadoEm": "2026-06-03T10:15:37.842Z"
+  },
+  {
+    "id": 1780481849324,
+    "nome": "Davi ",
+    "saldo": 15,
+    "fotoUrl": "/uploads/davi_.jpg",
+    "registadoEm": "2026-06-03T10:17:29.324Z"
+  },
+  {
+    "id": 1780481915372,
+    "nome": "Tiago Dias ",
+    "saldo": 10.65,
+    "fotoUrl": "/uploads/tiago_dias_.jpg",
+    "registadoEm": "2026-06-03T10:18:35.372Z"
+  },
+  {
+    "id": 1780481916527,
+    "nome": "Tiago Dias ",
+    "saldo": 15,
+    "fotoUrl": "/uploads/tiago_dias_.jpg",
+    "registadoEm": "2026-06-03T10:18:36.527Z"
+  },
+  {
+    "id": 1780482102139,
+    "nome": "André ",
+    "saldo": 13.55,
+    "fotoUrl": "/uploads/andr__.jpg",
+    "registadoEm": "2026-06-03T10:21:42.139Z"
+  },
+  {
+    "id": 1780484276117,
+    "nome": "Filipe Portugal ",
+    "saldo": 13.55,
+    "fotoUrl": "/uploads/filipe_portugal_.jpg",
+    "registadoEm": "2026-06-03T10:57:56.117Z"
+  },
+  {
+    "id": 1780484999172,
+    "nome": "Tomás ",
+    "saldo": 12.1,
+    "fotoUrl": "/uploads/tom_s_.jpg",
+    "registadoEm": "2026-06-03T11:09:59.172Z"
   }
 ]

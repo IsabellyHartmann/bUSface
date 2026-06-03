@@ -3,7 +3,7 @@ const statusText = document.getElementById('status-text');
 const statusBox = document.getElementById('status-box');
 const spinner = document.getElementById('loading-spinner');
 const scannerLine = document.querySelector('.scanner-line');
-
+//
 let labeledFaceDescriptors = [];
 let faceMatcher = null;
 let scanInterval = null;

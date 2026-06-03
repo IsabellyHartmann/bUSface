@@ -5,7 +5,6 @@ Sistema de validação biométrica para transportes e bancos.
 https://fuzzy-adventure-jjwx75x4gpxpc5qjv-3000.app.github.dev/
 
 
-
 # 🚌 bUSface - Sistema Biométrico Unificado para Validação de Acessos e Transportes
 
 O **bUSface** é uma aplicação web completa desenvolvida com **Node.js (Express)** e **JavaScript Avançado (ES6+)**, concebida para modernizar e substituir os métodos tradicionais de validação de acessos, tais como passes físicos de transportes públicos, cartões magnéticos ou bilhetes em papel. 
@@ -40,6 +39,7 @@ A aplicação foi estruturada como uma **SPA (Single Page Application)** dividid
 
 ## 📂 Estrutura de Diretórios do Projeto
 
+
 ```text
 ├── models/                       # Modelos de Redes Neuronais (.bin) e Configurações (.json)
 │   ├── face_landmark_68_model-weights_manifest.json
@@ -57,6 +57,7 @@ A aplicação foi estruturada como uma **SPA (Single Page Application)** dividid
 ├── server.js                     # Servidor backend e rotas da API REST
 ├── package.json                  # Gestão de dependências do Node.js
 └── README.md                     # Documentação técnica do projeto
+
 🌐 Endpoints da API REST (Backend)
 O servidor fornece uma API para gerir as operações do sistema sem simulações no código:
 
@@ -65,15 +66,18 @@ Rota: POST /api/register
 Tipo: multipart/form-data (Upload de Ficheiro)
 Parâmetros: nome (String), saldo (Number), foto (Ficheiro de imagem)
 Ação: Guarda a imagem na pasta /public/uploads/ com um nome único baseado em timestamp, gera um ID único e adiciona o passageiro ao ficheiro users_db.json com um histórico de viagens vazio.
+---
 2. Sincronizar Base de Dados
 Rota: GET /api/users
 Retorno: Array JSON com todos os utilizadores cadastrados.
 Ação: O frontend consome esta rota logo no arranque da página para descarregar as fotos de referência e alimentar a classe faceapi.FaceMatcher com os perfis conhecidos.
+
 3. Processar Débito de Viagem e Acesso
 Rota: POST /api/validate-access
 Tipo: application/json
 Payload: { "nome": "Nome do Passageiro" }
 Ação: Procura o utilizador no JSON. Se o saldo for igual ou superior ao preço da tarifa padrão (1.45€), o servidor desconta o valor, regista uma entrada com status: "Autorizado" (usando a data/hora local de Portugal pt-PT) e grava no disco. Caso contrário, gera um log de acesso recusado por falta de fundos.
+
 🧠 Fluxo Lógico do Reconhecimento Facial Real
 O bUSface não faz simulações de tempo fixo. Ele opera por computação biométrica real:
 
@@ -82,11 +86,14 @@ Extração de Assinaturas: O script lê as fotos de todos os utilizadores regist
 Deteção em Tempo Real: A webcam captura frames a cada 450ms. O rosto detetado é convertido num vetor matemático temporário.
 Distância Euclidiana: O sistema calcula a diferença matemática entre o rosto da câmara e as assinaturas guardadas. Se a distância for menor que o limiar de tolerância configurado (0.55), a identidade é validada.
 Bloqueio de Concorrência: Assim que o rosto é reconhecido, o loop do scanner é trancado (isProcessingFace = true) para impedir múltiplas requisições e débitos duplicados enquanto a resposta do servidor é processada e o ecrã exibe o feedback visual.
+
 🚀 Como Executar e Testar o Projeto
 Abre o terminal no teu ambiente (GitHub Codespaces) e instala as dependências:
    npm install
+
 Inicia o servidor Node.js:
    node server.js
+
 Configuração de Portas no Codespaces (Importante):
 Acede à aba Ports (Portas) no painel inferior do VS Code.
 Clica com o botão direito sobre a porta 3000 e altera a visibilidade de Private para Public.
@@ -101,3 +108,12 @@ Consulta a aba Admin para ver o log gerado automaticamente com o dia e hora exat
 2. **Organização:** Mostra a arquitetura do código (as 3 abas pedidas no teu enunciado: Cliente/Registo, Scanner e Admin).
 3. **Instruções Claras:** O passo sobre mudar a porta para "Public" mostra ao professor que sabes trabalhar com o ambiente cloud do GitHub Codespaces.
 Porquê esta atividade?
+
+
+### Porquê esta atividade?
+O projeto **bUSface** serve como uma demonstração prática de como a inteligência artificial e a visão computacional podem ser descentralizadas, movendo o processamento pesado (deteção e extração de características) para o lado do cliente (*Edge Computing* via browser), enquanto o servidor retém apenas a responsabilidade de gerir o estado de negócio, transações financeiras e persistência de dados. 
+
+Este equilíbrio garante:
+* **Escalabilidade:** Menor carga computacional no servidor central.
+* **Privacidade:** Processamento biométrico efetuado localmente no dispositivo de captura.
+* **Velocidade:** Respostas em milissegundos, essenciais para o fluxo contínuo de passageiros em transportes públicos.
