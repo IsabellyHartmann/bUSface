@@ -23,6 +23,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+
+
 // Middleware Essencial: Forçar Content-Type correto para ficheiros de pesos da IA
 // Isto resolve definitivamente o erro crónico do Codespaces bloquear os shards
 /*app.use('/models', (req, res, next) => {
@@ -34,6 +36,8 @@ const upload = multer({ storage: storage });
     next();
 }, express.static(path.join(__dirname, 'models')));*/
 
+
+// Middleware para servir ficheiros estáticos e processar JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use('/models', express.static('models'));
@@ -108,7 +112,7 @@ app.post('/api/validate-access', (req, res) => {
         });
     }
 });
-
+// --- FIM DAS ROTAS DA API ---
 app.listen(PORT, () => {
     console.log(`bUSface rodando em ambiente de produção na porta ${PORT}`);
 });

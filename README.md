@@ -62,30 +62,30 @@ A aplicação foi estruturada como uma **SPA (Single Page Application)** dividid
 O servidor fornece uma API para gerir as operações do sistema sem simulações no código:
 
 1. Criar Registo de Passageiro
-Rota: POST /api/register
-Tipo: multipart/form-data (Upload de Ficheiro)
-Parâmetros: nome (String), saldo (Number), foto (Ficheiro de imagem)
-Ação: Guarda a imagem na pasta /public/uploads/ com um nome único baseado em timestamp, gera um ID único e adiciona o passageiro ao ficheiro users_db.json com um histórico de viagens vazio.
+-Rota: POST /api/register
+-Tipo: multipart/form-data (Upload de Ficheiro)
+-Parâmetros: nome (String), saldo (Number), foto (Ficheiro de imagem)
+-Ação: Guarda a imagem na pasta /public/uploads/ com um nome único baseado em timestamp, gera um ID único e adiciona o passageiro ao ficheiro users_db.json com um histórico de viagens vazio.
 ---
 2. Sincronizar Base de Dados
-Rota: GET /api/users
-Retorno: Array JSON com todos os utilizadores cadastrados.
-Ação: O frontend consome esta rota logo no arranque da página para descarregar as fotos de referência e alimentar a classe faceapi.FaceMatcher com os perfis conhecidos.
+-Rota: GET /api/users
+-Retorno: Array JSON com todos os utilizadores cadastrados.
+-Ação: O frontend consome esta rota logo no arranque da página para descarregar as fotos de referência e alimentar a classe faceapi.FaceMatcher com os perfis conhecidos.
 
 3. Processar Débito de Viagem e Acesso
-Rota: POST /api/validate-access
-Tipo: application/json
-Payload: { "nome": "Nome do Passageiro" }
-Ação: Procura o utilizador no JSON. Se o saldo for igual ou superior ao preço da tarifa padrão (1.45€), o servidor desconta o valor, regista uma entrada com status: "Autorizado" (usando a data/hora local de Portugal pt-PT) e grava no disco. Caso contrário, gera um log de acesso recusado por falta de fundos.
+-Rota: POST /api/validate-access
+-Tipo: application/json
+-Payload: { "nome": "Nome do Passageiro" }
+-Ação: Procura o utilizador no JSON. Se o saldo for igual ou superior ao preço da tarifa padrão (1.45€), o servidor desconta o valor, regista uma entrada com status: "Autorizado" (usando a data/hora local de Portugal pt-PT) e -grava no disco. Caso contrário, gera um log de acesso recusado por falta de fundos.
 
 🧠 Fluxo Lógico do Reconhecimento Facial Real
 O bUSface não faz simulações de tempo fixo. Ele opera por computação biométrica real:
 
-Inicialização: O browser descarrega os pesos das redes neuronais (.bin) a partir da pasta /models.
-Extração de Assinaturas: O script lê as fotos de todos os utilizadores registados vindos da API e extrai os seus vetores faciais (vetor de 128 números).
-Deteção em Tempo Real: A webcam captura frames a cada 450ms. O rosto detetado é convertido num vetor matemático temporário.
-Distância Euclidiana: O sistema calcula a diferença matemática entre o rosto da câmara e as assinaturas guardadas. Se a distância for menor que o limiar de tolerância configurado (0.55), a identidade é validada.
-Bloqueio de Concorrência: Assim que o rosto é reconhecido, o loop do scanner é trancado (isProcessingFace = true) para impedir múltiplas requisições e débitos duplicados enquanto a resposta do servidor é processada e o ecrã exibe o feedback visual.
+-Inicialização: O browser descarrega os pesos das redes neuronais (.bin) a partir da pasta /models.
+-Extração de Assinaturas: O script lê as fotos de todos os utilizadores registados vindos da API e extrai os seus vetores faciais (vetor de 128 números).
+-Deteção em Tempo Real: A webcam captura frames a cada 450ms. O rosto detetado é convertido num vetor matemático temporário.
+-Distância Euclidiana: O sistema calcula a diferença matemática entre o rosto da câmara e as assinaturas guardadas. Se a distância for menor que o limiar de tolerância configurado (0.55), a identidade é validada.
+-Bloqueio de Concorrência: Assim que o rosto é reconhecido, o loop do scanner é trancado (isProcessingFace = true) para impedir múltiplas requisições e débitos duplicados enquanto a resposta do servidor é processada e o ecrã   exibe o feedback visual.
 
 🚀 Como Executar e Testar o Projeto
 Abre o terminal no teu ambiente (GitHub Codespaces) e instala as dependências:
@@ -95,13 +95,14 @@ Inicia o servidor Node.js:
    node server.js
 
 Configuração de Portas no Codespaces (Importante):
-Acede à aba Ports (Portas) no painel inferior do VS Code.
-Clica com o botão direito sobre a porta 3000 e altera a visibilidade de Private para Public.
-Clica no link gerado para abrir a aplicação no teu browser sob protocolo seguro HTTPS (obrigatório para que o browser dê permissão de acesso à webcam).
-Guia de Teste Rápido:
-Acede à aba Registo, preenche o teu nome, define um saldo (ex: 5.00) e faz o upload de uma foto tua bem nítida e de frente. Clica em Submeter.
-Vai à aba Scanner, permite o acesso à câmara e olha para a lente. O sistema irá reconhecer-te, pintar o ecrã de Verde e mostrar o teu saldo atualizado após descontar os 1.45€.
-Consulta a aba Admin para ver o log gerado automaticamente com o dia e hora exatos da tua validação.
+
+-Acede à aba Ports (Portas) no painel inferior do VS Code.
+-Clica com o botão direito sobre a porta 3000 e altera a visibilidade de Private para Public.
+-Clica no link gerado para abrir a aplicação no teu browser sob protocolo seguro HTTPS (obrigatório para que o browser dê permissão de acesso à webcam).
+-Guia de Teste Rápido:
+-Acede à aba Registo, preenche o teu nome, define um saldo (ex: 5.00) e faz o upload de uma foto tua bem nítida e de frente. Clica em Submeter.
+-Vai à aba Scanner, permite o acesso à câmara e olha para a lente. O sistema irá reconhecer-te, pintar o ecrã de Verde e mostrar o teu saldo atualizado após descontar os 1.45€.
+-Consulta a aba Admin para ver o log gerado automaticamente com o dia e hora exatos da tua validação.
 
 ### O que ganhas com este README?
 1. **Fundamentação Técnica:** Explica termos de IA de forma rigorosa (`FaceMatcher`, `Distância Euclidiana`, `Threshold 0.55`), provando que dominas o assunto.

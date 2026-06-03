@@ -3,7 +3,8 @@ const statusText = document.getElementById('status-text');
 const statusBox = document.getElementById('status-box');
 const spinner = document.getElementById('loading-spinner');
 const scannerLine = document.querySelector('.scanner-line');
-//
+
+// Variáveis globais para IA e estado do scanner
 let labeledFaceDescriptors = [];
 let faceMatcher = null;
 let scanInterval = null;
@@ -113,6 +114,7 @@ video.addEventListener('play', () => {
     }, 400);
 });
 
+// 4. Processar o resultado da validação facial e comunicar com a API de Saldo
 async function processAccess(nomeUsuario) {
     try {
         const response = await fetch('/api/validate-access', {
@@ -142,7 +144,7 @@ function showStatus(text, type) {
     statusBox.className = `status-${type}`;
 }
 
-// 4. Tratamento do Formulário de Registo (Client-Side)
+// 5. Tratamento do Formulário de Registo (Client-Side)
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -166,7 +168,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     }
 });
 
-// 5. Atualização da Tabela Estatística (Admin-Side)
+// 6. Atualização da Tabela Estatística (Admin-Side)
 async function loadAdminData() {
     const tbody = document.getElementById('admin-table-body');
     tbody.innerHTML = "<tr><td colspan='3'>A carregar dados confidenciais...</td></tr>";
@@ -180,7 +182,7 @@ async function loadAdminData() {
             tbody.innerHTML = "<tr><td colspan='3'>Nenhum utilizador registado a bordo.</td></tr>";
             return;
         }
-
+        // Exibe o estado de cada utilizador com base no saldo, usando os dados reais da BD
         users.forEach(user => {
             const tr = document.createElement('tr');
             const estado = user.saldo >= 1.45 ? "🟢 Ativo / Regularizado" : "🔴 Suspenso (Sem Saldo)";
